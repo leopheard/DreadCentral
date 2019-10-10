@@ -3,7 +3,7 @@ from resources.lib import mainaddon
 
 plugin = Plugin()
 url1 = "https://www.dreadcentral.com/category/podcasts/who-goes-there/feed/"
-url2 = "https://www.dreadcentral.com/feed/podcast/
+url2 = "https://www.dreadcentral.com/feed/podcast/"
 url3 = "http://www.dreadcentral.com/category/podcasts/horrible-imaginings/feed/"
 @plugin.route('/')
 def main_menu():
