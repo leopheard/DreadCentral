@@ -19,11 +19,11 @@ msgid "Who Goes There"
 msgstr ""
 
 msgctxt "#30002"
-msgid "Dread Central"
+msgid "Silent Night, Deadly Podcast"
 msgstr ""
 
 msgctxt "#30003"
-msgid "Horrible Imaginings"
+msgid "Dread Central"
 msgstr ""
 
 # empty string with id 32003

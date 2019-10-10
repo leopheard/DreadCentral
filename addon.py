@@ -2,10 +2,13 @@ from xbmcswift2 import Plugin, xbmcgui
 from resources.lib import mainaddon
 
 plugin = Plugin()
-url1 = "https://www.dreadcentral.com/category/podcasts/who-goes-there/feed/"
-url2 = "https://www.dreadcentral.com/feed/podcast/"
-url3 = "http://www.dreadcentral.com/category/podcasts/horrible-imaginings/feed/"
+
+url1 = "https://www.spreaker.com/show/4095022/episodes/feed"
+url2 = "https://www.spreaker.com/show/4095023/episodes/feed"
+url3 = "https://www.spreaker.com/show/4095021/episodes/feed"
+
 @plugin.route('/')
+
 def main_menu():
     items = [
         {
@@ -19,7 +22,7 @@ def main_menu():
         {
             'label': plugin.get_string(30003),
             'path': plugin.url_for('episodes3'),
-            'thumbnail': "https://is4-ssl.mzstatic.com/image/thumb/Podcasts123/v4/63/79/ec/6379ec7a-6bdc-7d6e-cbf6-5cd36ab54322/mza_8839720560510624785.png/600x600bb.jpg"},
+            'thumbnail': "https://www.dreadcentral.com/wp-content/uploads/powerpress/DC_Podcast_Logo-120.jpg"},
     ]
     return items
 
@@ -29,12 +32,15 @@ def episodes1():
     playable_podcast1 = mainaddon.get_playable_podcast1(soup1)
     items = mainaddon.compile_playable_podcast1(playable_podcast1)
     return items
+
+
 @plugin.route('/episodes2/')
 def episodes2():
     soup2 = mainaddon.get_soup2(url2)
     playable_podcast2 = mainaddon.get_playable_podcast2(soup2)
     items = mainaddon.compile_playable_podcast2(playable_podcast2)
     return items
+
 @plugin.route('/episodes3/')
 def episodes3():
     soup3 = mainaddon.get_soup3(url3)

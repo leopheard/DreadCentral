@@ -7,16 +7,24 @@ def get_soup1(url1):
     soup1 = BeautifulSoup(page.text, 'html.parser')
     print("type: ", type(soup1))
     return soup1
+
 def get_soup2(url2):
     page = requests.get(url2)
     soup2 = BeautifulSoup(page.text, 'html.parser')
-    print("type: ", type(soup2)
+    print("type: ", type(soup2))
     return soup2
+
 def get_soup3(url3):
     page = requests.get(url3)
     soup3 = BeautifulSoup(page.text, 'html.parser')
     print("type: ", type(soup3))
     return soup3
+
+def get_soup4(url4):
+    page = requests.get(url4)
+    soup4 = BeautifulSoup(page.text, 'html.parser')
+    print("type: ", type(soup4))
+    return soup4
 
 def get_playable_podcast1(soup1):
     subjects = []
@@ -27,12 +35,18 @@ def get_playable_podcast1(soup1):
             print("\n\nLink: ", link)
             title = content.find('title')
             title = title.get_text()
+#            thumbnail = content.find('itunes:image')
+#            thumbnail = thumbnail.get('href')
+#            thumbnail = content.find('itunes:image')
+#            thumbnail = desc.get_text('href')
+            thumbnail = content.find('itunes:image')
+            thumbnail = thumbnail.get('href')
         except AttributeError:
             continue
         item = {
                 'url': link,
                 'title': title,
-                'thumbnail': "https://www.dreadcentral.com/wp-content/uploads/powerpress/TeethFinalTurq.png",
+                'thumbnail': thumbnail,
         }
         subjects.append(item)
     return subjects
@@ -56,12 +70,14 @@ def get_playable_podcast2(soup2):
             print("\n\nLink: ", link)
             title = content.find('title')
             title = title.get_text()
+            thumbnail = content.find('itunes:image')
+            thumbnail = thumbnail.get('href')
         except AttributeError:
             continue
         item = {
                 'url': link,
                 'title': title,
-                'thumbnail': "https://www.dreadcentral.com/wp-content/uploads/powerpress/DC_Podcast_Logo-120.jpg",
+                'thumbnail': thumbnail,
         }
         subjects.append(item)
     return subjects
@@ -85,19 +101,51 @@ def get_playable_podcast3(soup3):
             print("\n\nLink: ", link)
             title = content.find('title')
             title = title.get_text()
+            thumbnail = content.find('itunes:image')
+            thumbnail = thumbnail.get('href')
         except AttributeError:
-
             continue
         item = {
                 'url': link,
                 'title': title,
-                'thumbnail': "https://is4-ssl.mzstatic.com/image/thumb/Podcasts123/v4/63/79/ec/6379ec7a-6bdc-7d6e-cbf6-5cd36ab54322/mza_8839720560510624785.png/600x600bb.jpg",
+                'thumbnail': thumbnail,
         }
         subjects.append(item)
     return subjects
 def compile_playable_podcast3(playable_podcast3):
     items = []
     for podcast in playable_podcast3:
+        items.append({
+            'label': podcast['title'],
+            'thumbnail': podcast['thumbnail'],
+            'path': podcast['url'],
+            'is_playable': True,
+    })
+    return items
+
+def get_playable_podcast4(soup4):
+    subjects = []
+    for content in soup4.find_all('item'):
+        try:
+            link = content.find('enclosure')
+            link = link.get('url')
+            print("\n\nLink: ", link)
+            title = content.find('title')
+            title = title.get_text()
+            thumbnail = content.find('itunes:image')
+            thumbnail = thumbnail.get('href')
+        except AttributeError:
+            continue
+        item = {
+                'url': link,
+                'title': title,
+                'thumbnail': thumbnail,
+        }
+        subjects.append(item)
+    return subjects
+def compile_playable_podcast4(playable_podcast4):
+    items = []
+    for podcast in playable_podcast4:
         items.append({
             'label': podcast['title'],
             'thumbnail': podcast['thumbnail'],
